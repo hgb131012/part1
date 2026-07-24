@@ -20,18 +20,30 @@ const StatisticsHeader = ({ title, style }) => {
   )
 }
 
-const StatisticsDisplay = ({ goodNum, neutralNum, badNum, totalNum, average, positive, style }) => {
+const StatisticsLine = ({ style, content, nums }) => {
   return (
-    <section>
-      <p style={style}>good {goodNum}</p>
-      <p style={style}>neutral {neutralNum}</p>
-      <p style={style}>bad {badNum}</p>
-      <p style={style}>all {totalNum}</p>
-      <p style={style}>average {average}</p>
-      <p style={style}>postive {positive} %</p>
-    </section>
-    
+    <p style={style}>{content} {nums}</p>
   )
+}
+
+const StatisticsDisplay = (props) => {
+  if(props.totalNum > 0) {
+    return (
+      <section>
+        <StatisticsLine style={props.style} content="good" nums={props.goodNum} />
+        <StatisticsLine style={props.style} content="neutral" nums={props.neutralNum} />
+        <StatisticsLine style={props.style} content="bad" nums={props.badNum} />
+        <StatisticsLine style={props.style} content="all" nums={props.totalNum} />
+        <StatisticsLine style={props.style} content="average" nums={props.average} />
+        <StatisticsLine style={props.style} content="positive" nums={`${props.positive} %`} />
+      </section>
+    )
+  } else {
+    return (
+      <p>No feedback given</p>
+    )
+  }
+  
 }
 
 const App = () => {
